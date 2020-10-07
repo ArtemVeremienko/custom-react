@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import App from './app'
 
 ReactDOM.render(
-  <App />
+  <App min={0} max={10} />
   , document.getElementById('root')
 )
