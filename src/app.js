@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const App = ({ min, max }) => {
 
@@ -7,21 +7,21 @@ const App = ({ min, max }) => {
 
   const decrease = () => {
     const nextCurrent = current - 1
-    if (nextCurrent < min) return;
+    if (nextCurrent < min) return
     setCurrent(nextCurrent)
   }
 
   const increase = () => {
     const nextCurrent = current + 1
-    if (nextCurrent > max) return;
-    setCurrent(nextCurrent + 1)
+    if (nextCurrent > max) return
+    setCurrent(nextCurrent)
   }
 
   const handlerInput = (e) => {
-    const value = parseInt(e.target.value);
-    console.log(value)
-    if (!value || value < min || value > max) return;
-    setCurrent(value);
+    let value = parseInt(e.target.value)
+    if (isNaN(value)) return
+    value = Math.max(min, Math.min(max, value))
+    setCurrent(value)
   }
 
   return (
@@ -35,8 +35,8 @@ const App = ({ min, max }) => {
 }
 
 App.propTypes = {
-  min: PropTypes.number,
-  max: PropTypes.number,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
 }
 
 export default App
