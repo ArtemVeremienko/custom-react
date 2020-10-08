@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 
 const App = ({ min, max }) => {
 
-  const [current, setCurrent] = useState(min)
   const [inputValue, setInputValue] = useState(min)
+  const [prevValue, setPrevValue] = useState(min)
 
   const decrease = () => {
-    const nextCurrent = current - 1
-    set(nextCurrent)
+    const nextVal = inputValue - 1
+    set(nextVal)
   }
 
   const increase = () => {
-    const nextCurrent = current + 1
-    set(nextCurrent)
+    const nextVal = inputValue + 1
+    set(nextVal)
   }
 
   const handleInput = (e) => {
@@ -22,14 +22,16 @@ const App = ({ min, max }) => {
 
   const set = (val) => {
     const value = Math.max(min, Math.min(max, val))
-    setCurrent(value)
+    setPrevValue(value)
     setInputValue(value)
   }
 
   const checkValue = () => {
     let value = parseInt(inputValue)
-    set(isNaN(value) ? min : value)
+    set(isNaN(value) ? prevValue : value)
   }
+
+
 
   const checkEnterPress = ({ key }) => {
     if (key === 'Enter') checkValue()
