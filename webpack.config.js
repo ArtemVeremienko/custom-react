@@ -1,4 +1,5 @@
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -25,7 +26,33 @@ module.exports = {
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development', // webpack 4 only
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: '[local]--[hash:base64:5]',
+              }
+            }
+
+          },
+        ],
+      },
     ]
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    })
+  ],
 }
