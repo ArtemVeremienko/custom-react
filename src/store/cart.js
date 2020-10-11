@@ -1,23 +1,31 @@
+import { makeObservable, observable, computed, action } from 'mobx';
+
 class Cart {
-  products = getProducts()
-
-  get total() {
-    return this.products.reduce((t, pr) => t + pr.price * pr.current, 0)
+  constructor() {
+    makeObservable(this)
   }
 
-  change(i, cnt) {
-    this.products.[i].current = cnt;
+  @observable products = getProducts()
+
+  @computed get total() {
+    return this.products.reduce((t, pr) => t + pr.price * pr.current, 0);
   }
 
-  remove(i) {
-    this.products.splice(i, 1)
+  @action change(i, cnt) {
+    this.products[i].current = cnt;
+  }
+
+  @action remove(i) {
+    this.products.splice(i, 1);
   }
 }
 
-export default new Cart()
+export default new Cart();
 
 
 
+
+// server api
 function getProducts() {
   return [
     {
