@@ -7,6 +7,9 @@ import orderModel from '~s/order';
 
 import { observer } from 'mobx-react';
 
+import { routesMap } from '~/routes'
+import { Link } from 'react-router-dom'
+
 @observer class Order extends React.Component {
 
   state = {
@@ -23,28 +26,28 @@ import { observer } from 'mobx-react';
 
   confirm = () => {
     this.hide();
-    router.moveTo('result');
+    this.props.history.push(routesMap.result)
   }
 
   render() {
     let formFields = [];
 
     for (let key in orderModel.formData) {
-      let { label, type, value, pattern } = orderModel.formData[key];
+      let { label, type, value, valid, errorText } = orderModel.formData[key];
 
       formFields.push(
         <Form.Group key={key} controlId={'order-form-' + key}>
           <Form.Label>{label}</Form.Label>
           <Form.Control
-            type={type}
             value={value}
-            onChange={(e) => orderModel.changeField(key, e.target.value)}
+            onChange={(e) => orderModel.change(key, e.target.value)}
           />
+          {!valid && <Form.Text className="text-muted">{errorText}</Form.Text>}
         </Form.Group>
       );
     }
 
-    const { name, email, phone } = orderModel.values
+    const { name, email, phone } = orderModel.data
 
     return (
 
@@ -57,13 +60,15 @@ import { observer } from 'mobx-react';
           {formFields}
         </Form>
 
-        <Button variant="warning" onClick={() => router.moveTo('cart')}>
+        <Link className="btn btn-warning" to={routesMap.home}>
           Back to cart
-          </Button>
-          &nbsp;
-        <Button variant="primary" onClick={this.show}>
+        </Link>
+        &nbsp;
+        <Button variant="primary" onClick={this.show}
+          disabled={!orderModel.formValid}
+        >
           Apply order
-          </Button>
+        </Button>
 
 
         <Modal show={this.state.showModal} backdrop="static" onHide={this.hide}>

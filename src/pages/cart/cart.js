@@ -4,9 +4,10 @@ import AppMinMax from '~c/inputs/minmax';
 import { Table, Button } from 'react-bootstrap'
 
 import cartModel from '~s/cart.js';
-import router from '~s/router.js';
-
 import { observer } from 'mobx-react';
+
+import { routesMap } from '~/routes'
+import { Link } from 'react-router-dom'
 
 @observer class Cart extends React.Component {
   render() {
@@ -20,7 +21,7 @@ import { observer } from 'mobx-react';
             <AppMinMax min={1}
               max={rest}
               cnt={current}
-              onChange={(cnt) => cartModel.change(i, cnt)}
+              onChange={cartModel.changeOn[i]}
             />
           </td>
           <td>{price * current}</td>
@@ -53,9 +54,9 @@ import { observer } from 'mobx-react';
         </Table>
         <h3>Total: {cartModel.total}&#8381;</h3>
         <hr />
-        <Button variant="primary" onClick={() => router.moveTo('order')}>
+        <Link to={routesMap.order} className="btn btn-primary">
           Send
-        </Button>
+        </Link>
       </Row>
     );
   }
