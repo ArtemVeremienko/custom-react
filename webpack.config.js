@@ -9,6 +9,9 @@ module.exports = {
     publicPath: 'dist/',
   },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
