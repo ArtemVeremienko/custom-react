@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 
 import styles from './minmax.module.css';
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
   static defaultProps = {
     onChange: function (cnt) { }
   }
