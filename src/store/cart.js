@@ -24,6 +24,10 @@ class Cart {
   @action remove(i) {
     this.products.splice(i, 1);
   }
+
+  getProduct(id) {
+    return this.products.find(product => product.id === id)
+  }
 }
 
 export default new Cart();
