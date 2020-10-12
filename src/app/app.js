@@ -1,14 +1,25 @@
 import React from 'react';
-import router from '~s/router';
 import { Container } from 'react-bootstrap'
 import { observer } from 'mobx-react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import routes from '~/routes'
 
 @observer class App extends React.Component {
   render() {
+
+    const routesComponents = routes.map(({ url, component, exact }) =>
+      <Route path={url} component={component}
+        exact={exact} key={url} />
+    )
+
     return (
-      <Container>
-        {router.component}
-      </Container>
+      <Router>
+        <Container>
+          <Switch>
+            {routesComponents}
+          </Switch>
+        </Container>
+      </Router>
     )
   }
 }
