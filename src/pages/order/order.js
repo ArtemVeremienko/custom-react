@@ -1,7 +1,6 @@
 import React from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Col, Form, Button, Modal } from 'react-bootstrap';
 
-import router from '~s/router';
 import cartModel from '~s/cart';
 import orderModel from '~s/order';
 
@@ -50,45 +49,46 @@ import { Link } from 'react-router-dom'
     const { name, email, phone } = orderModel.data
 
     return (
+      <>
+        <Col>
+          <h2> Order</h2>
 
-      <div>
-        <h2>Order</h2>
+          <hr />
 
-        <hr />
+          <Form>
+            {formFields}
+          </Form>
 
-        <Form>
-          {formFields}
-        </Form>
-
-        <Link className="btn btn-warning" to={routesMap.home}>
-          Back to cart
+          <Link className="btn btn-warning" to={routesMap.cart}>
+            Back to cart
         </Link>
         &nbsp;
         <Button variant="primary" onClick={this.show}
-          disabled={!orderModel.formValid}
-        >
-          Apply order
+            disabled={!orderModel.formValid}
+          >
+            Apply order
         </Button>
 
 
-        <Modal show={this.state.showModal} backdrop="static" onHide={this.hide}>
-          <Modal.Header closeButton>
-            <Modal.Title>Check information</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Dear <strong>{name}</strong> you purchase for ${cartModel.total} ready.</p>
-            <p>We send confirmation at {email} and {phone}.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.hide}>
-              Ooops
+          <Modal show={this.state.showModal} backdrop="static" onHide={this.hide}>
+            <Modal.Header closeButton>
+              <Modal.Title>Check information</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Dear <strong>{name}</strong> you purchase for ${cartModel.total} ready.</p>
+              <p>We send confirmation at {email} and {phone}.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.hide}>
+                Ooops
             </Button>
-            <Button variant="primary" onClick={this.confirm}>
-              All right
+              <Button variant="primary" onClick={this.confirm}>
+                All right
             </Button>
-          </Modal.Footer>
-        </Modal>
-      </div >
+            </Modal.Footer>
+          </Modal>
+        </Col>
+      </>
     )
   }
 }

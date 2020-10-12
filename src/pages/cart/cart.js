@@ -1,7 +1,6 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row'
 import AppMinMax from '~c/inputs/minmax';
-import { Table, Button } from 'react-bootstrap'
+import { Col, Table, Button } from 'react-bootstrap'
 
 import cartModel from '~s/cart.js';
 import { observer } from 'mobx-react';
@@ -36,7 +35,7 @@ import { Link } from 'react-router-dom'
     });
 
     return (
-      <Row>
+      <Col>
         <h2>Cart</h2>
         <Table bordered>
           <thead>
@@ -57,7 +56,7 @@ import { Link } from 'react-router-dom'
         <Link to={routesMap.order} className="btn btn-primary">
           Send
         </Link>
-      </Row>
+      </Col>
     );
   }
 }

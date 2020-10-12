@@ -1,10 +1,10 @@
 import React from 'react'
-import E404 from '~c/errors/404'
+import { Col } from 'react-bootstrap'
 
 export default (props) => {
   return (
-    <div>
+    <Col>
       Post #{props.match.params.some}
-    </div>
+    </Col>
   )
 }
