@@ -9,7 +9,7 @@ export default () => {
       <hr />
       <div className="alert alert-warning">
         <p>
-          <Link to={routesMap.home}>
+          <Link to={routesMap.home} className="btn btn-outline-info">
             Go to homepage
           </Link>
         </p>
