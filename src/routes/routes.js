@@ -1,4 +1,4 @@
-import Home from '~p/homepage'
+import Home from '~p/home'
 import Cart from '~p/cart'
 import Order from '~p/order'
 import Result from '~p/result'
