@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import routes from '~/routes'
 import { routesMap } from '~/routes'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 @observer class App extends React.Component {
   render() {
@@ -22,8 +22,8 @@ import { Link } from 'react-router-dom'
               <Navbar bg="primary" variant="dark">
                 <Link to={routesMap.home} className="navbar-brand">Home</Link>
                 <Nav className="mr-auto">
-                  <Link to={routesMap.cart} className="nav-link">Cart</Link>
-                  <Link to={routesMap.order} className="nav-link">Order</Link>
+                  <NavLink to={routesMap.cart} className="nav-link">Cart</NavLink>
+                  <NavLink to={routesMap.order} className="nav-link">Order</NavLink>
                 </Nav>
                 <Form inline>
                   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
