@@ -1,32 +1,24 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
+import withStore from '~/hocs/withStore'
 
-import cartModel from '~s/cart.js';
-import orderModel from '~s/order.js';
 
-import { urlBuilder } from '~/routes'
-import { Link } from 'react-router-dom'
+class Result extends React.Component {
+  render() {
+    const orderModel = this.props.stores.order
+    const cartModel = this.props.stores.cart
 
-export default () => {
-  const postsTmp = [1, 2, 3]
-  const links = postsTmp.map(post =>
-    <div key={post}>
-      <Link to={urlBuilder('blogPost', { some: post })}>
-        Post {post}
-      </Link>
-    </div>
-  )
-  const { data } = orderModel;
+    const { data } = orderModel;
 
-  return (
-    <Col>
-      <Jumbotron className="text-center">
-        <h2>Congratulations {data.name} with your purchase!</h2>
-        <p>Total amount: <strong>{cartModel.total}&#8381;</strong></p>
-        <div>
-          {links}
-        </div>
-      </Jumbotron>
-    </Col>
-  )
+    return (
+      <Col>
+        <Jumbotron className="text-center">
+          <h2>Congratulations {data.name} with your purchase!</h2>
+          <p>Total amount: <strong>{cartModel.total}&#8381;</strong></p>
+        </Jumbotron>
+      </Col>
+    )
+  }
 };
+
+export default withStore(Result)
