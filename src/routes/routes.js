@@ -1,16 +1,21 @@
-import Home from '~p/home'
 import Cart from '~p/cart'
 import Order from '~p/order'
 import Result from '~p/result'
 import Page404 from '~p/error404'
-import Post from '~p/post'
-import Product from '~p/product'
+import ProductList from '~p/products/list'
+import ProductItem from '~p/products/item'
 
 const routes = [
   {
     name: 'home',
     url: '/',
-    component: Home,
+    component: ProductList,
+    exact: true,
+  },
+  {
+    name: 'product',
+    url: '/product/:id',
+    component: ProductItem,
     exact: true,
   },
   {
@@ -29,18 +34,6 @@ const routes = [
     name: 'result',
     url: '/done',
     component: Result,
-    exact: true,
-  },
-  {
-    name: 'product',
-    url: '/product/:id',
-    component: Product,
-    exact: true,
-  },
-  {
-    name: 'blogPost',
-    url: '/news/:some',
-    component: Post,
     exact: true,
   },
   {
