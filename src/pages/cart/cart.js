@@ -1,16 +1,16 @@
 import React from 'react';
 import AppMinMax from '~c/inputs/minmax';
 import { Col, Table, Button } from 'react-bootstrap'
-
-import cartModel from '~s/cart.js';
-import { observer } from 'mobx-react';
-
 import { routesMap } from '~/routes'
 import { Link } from 'react-router-dom'
+import withStore from '~/hocs/withStore'
+import LinkButton from '~c/links/button'
 
-@observer class Cart extends React.Component {
+class Cart extends React.Component {
   render() {
-    let productsRows = cartModel.products.map((product, i) => {
+    const cartModel = this.props.stores.cart
+
+    const productsRows = cartModel.products.map((product, i) => {
       const { id, title, price, rest, current } = product;
       return (
         <tr key={id}>
@@ -56,9 +56,12 @@ import { Link } from 'react-router-dom'
         <Link to={routesMap.order} className="btn btn-primary">
           Send
         </Link>
+        <LinkButton to={routesMap.order} className="btn btn-primary">
+          Send
+        </LinkButton>
       </Col>
     );
   }
 }
 
-export default Cart;
+export default withStore(Cart);
