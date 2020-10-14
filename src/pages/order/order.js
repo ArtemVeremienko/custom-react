@@ -1,15 +1,10 @@
 import React from 'react';
 import { Col, Form, Button, Modal } from 'react-bootstrap';
-
-import cartModel from '~s/cart';
-import orderModel from '~s/order';
-
-import { observer } from 'mobx-react';
-
 import { routesMap } from '~/routes'
 import { Link } from 'react-router-dom'
+import withStore from '~/hocs/withStore'
 
-@observer class Order extends React.Component {
+class Order extends React.Component {
 
   state = {
     showModal: false
@@ -29,10 +24,13 @@ import { Link } from 'react-router-dom'
   }
 
   render() {
+    const cartModel = this.props.stores.cart
+    const orderModel = this.props.stores.order
+
     let formFields = [];
 
     for (let key in orderModel.formData) {
-      let { label, type, value, valid, errorText } = orderModel.formData[key];
+      let { label, value, valid, errorText } = orderModel.formData[key];
 
       formFields.push(
         <Form.Group key={key} controlId={'order-form-' + key}>
@@ -93,4 +91,4 @@ import { Link } from 'react-router-dom'
   }
 }
 
-export default Order;
+export default withStore(Order);

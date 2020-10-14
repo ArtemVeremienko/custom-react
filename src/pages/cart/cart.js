@@ -10,8 +10,8 @@ class Cart extends React.Component {
   render() {
     const cartModel = this.props.stores.cart
 
-    const productsRows = cartModel.products.map((product, i) => {
-      const { id, title, price, rest, current } = product;
+    const productsRows = cartModel.productsDetailed.map((product, i) => {
+      const { id, title, price, rest, cnt } = product;
       return (
         <tr key={id}>
           <td>{title}</td>
@@ -19,14 +19,14 @@ class Cart extends React.Component {
           <td>
             <AppMinMax min={1}
               max={rest}
-              cnt={current}
-              onChange={cartModel.changeOn[i]}
+              cnt={cnt}
+              onChange={cnt => cartModel.change(id, cnt)}
             />
           </td>
-          <td>{price * current}</td>
+          <td>{price * cnt}</td>
           <td>
             <Button variant="danger"
-              onClick={() => cartModel.remove(i)}>
+              onClick={() => cartModel.remove(id)}>
               X
             </Button>
           </td>
@@ -53,7 +53,7 @@ class Cart extends React.Component {
         </Table>
         <h3>Total: {cartModel.total}&#8381;</h3>
         <hr />
-        <Link to={routesMap.order} className="btn btn-primary">
+        <Link to={routesMap.order} className="btn btn-primary mr-1">
           Send
         </Link>
         <LinkButton to={routesMap.order} className="btn btn-primary">
