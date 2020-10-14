@@ -1,6 +1,6 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 
-class Order {
+export default class {
   constructor(rootStore) {
     makeObservable(this)
     this.rootStore = rootStore;
@@ -50,5 +50,3 @@ class Order {
     field.valid = field.validator(field.value);
   }
 }
-
-export default new Order();

@@ -15,7 +15,7 @@ export default class {
     }, {})
   }
 
-  getBy(id) {
+  getById(id) {
     const index = this.productsMap[id]
     if (index === undefined) return null
     return this.items[index]

@@ -1,6 +1,6 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 
-class Cart {
+export default class {
   constructor(rootStore) {
     makeObservable(this)
     this.rootStore = this.rootStore
@@ -38,4 +38,4 @@ class Cart {
   }
 }
 
-export default new Cart();
+
