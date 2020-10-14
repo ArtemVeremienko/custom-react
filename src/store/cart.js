@@ -1,70 +1,41 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 
 class Cart {
-  constructor() {
+  constructor(rootStore) {
     makeObservable(this)
+    this.rootStore = this.rootStore
   }
 
-  @observable products = getProducts()
+  @observable products = []
+
+  @computed get productsDetailed() {
+    return this.products.map(({ id, cnt }) => {
+      const product = this.rootStore.products.getById(id)
+      return { ...product, cnt: cnt }
+    })
+  }
+
+  @computed get inCart() {
+    return (id) => this.products.some(product => product.id === id)
+  }
 
   @computed get total() {
-    return this.products.reduce((t, pr) => t + pr.price * pr.current, 0);
+    return this.productsDetailed.reduce((t, pr) => t + pr.price * pr.current, 0);
   }
 
-  @computed get changeOn() {
-    return this.products.map((_, i) =>
-      (cnt) => this.change(i, cnt)
-    );
+  @action add(id) {
+    this.products.push({ id, cnt: 1 })
   }
 
-  @action change(i, cnt) {
-    this.products[i].current = cnt;
+  @action change(id, cnt) {
+    const index = this.products.findIndex(pr => pr.id === id)
+    if (index !== -1) this.products[index].cnt = cnt
   }
 
-  @action remove(i) {
-    this.products.splice(i, 1);
-  }
-
-  getProduct(id) {
-    return this.products.find(product => product.id === id)
+  @action remove(id) {
+    const index = this.products.findIndex(pr => pr.id === id)
+    if (index !== -1) this.products.splice(index, 1);
   }
 }
 
 export default new Cart();
-
-
-
-
-// server api
-function getProducts() {
-  return [
-    {
-      id: 100,
-      title: 'Ipnone 200',
-      price: 12000,
-      rest: 10,
-      current: 1
-    },
-    {
-      id: 101,
-      title: 'Samsung AAZ8',
-      price: 22000,
-      rest: 5,
-      current: 1
-    },
-    {
-      id: 103,
-      title: 'Nokia 3310',
-      price: 5000,
-      rest: 2,
-      current: 1
-    },
-    {
-      id: 105,
-      title: 'Huawei ZZ',
-      price: 15000,
-      rest: 8,
-      current: 1
-    }
-  ];
-}
