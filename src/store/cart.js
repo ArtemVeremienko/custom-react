@@ -3,7 +3,7 @@ import { makeObservable, observable, computed, action } from 'mobx';
 export default class {
   constructor(rootStore) {
     makeObservable(this)
-    this.rootStore = this.rootStore
+    this.rootStore = rootStore
   }
 
   @observable products = []
@@ -11,7 +11,7 @@ export default class {
   @computed get productsDetailed() {
     return this.products.map(({ id, cnt }) => {
       const product = this.rootStore.products.getById(id)
-      return { ...product, cnt: cnt }
+      return { ...product, cnt }
     })
   }
 
@@ -20,7 +20,7 @@ export default class {
   }
 
   @computed get total() {
-    return this.productsDetailed.reduce((t, pr) => t + pr.price * pr.current, 0);
+    return this.productsDetailed.reduce((t, { price, cnt }) => t + price * cnt, 0);
   }
 
   @action add(id) {
