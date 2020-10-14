@@ -1,8 +1,9 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 
 class Order {
-  constructor() {
+  constructor(rootStore) {
     makeObservable(this)
+    this.rootStore = rootStore;
   }
 
   @observable formData = {
