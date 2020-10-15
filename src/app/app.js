@@ -13,8 +13,8 @@ import stores from '~s/rootstore'
 
     const navbar = (
       <Navbar bg="primary" variant="dark">
-        <Link to={routesMap.home} className="navbar-brand">Home</Link>
         <Nav className="mr-auto">
+          <NavLink to={routesMap.home} className="nav-link" exact>Home</NavLink>
           <NavLink to={routesMap.cart} className="nav-link">Cart</NavLink>
           <NavLink to={routesMap.order} className="nav-link">Order</NavLink>
         </Nav>
