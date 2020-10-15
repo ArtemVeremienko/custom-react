@@ -1,0 +1,28 @@
+.basket {
+  position: relative;
+}
+
+span.cart {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.cart:hover {
+  color: #eee;
+  transform: scale(1.1);
+}
+
+.count {
+  position: absolute;
+  display: block;
+  min-width: 20px;
+  height: 20px;
+  top: -5px;
+  right: -5px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  line-height: 20px;
+  background-color: tomato;
+  border-radius: 50%;
+}

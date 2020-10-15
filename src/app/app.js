@@ -4,6 +4,7 @@ import { observer, Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import routes, { routesMap } from '~/routes'
 import { Link, NavLink } from 'react-router-dom'
+import styles from './app.module.css'
 
 import stores from '~s/rootstore'
 
@@ -17,10 +18,10 @@ import stores from '~s/rootstore'
           <NavLink to={routesMap.cart} className="nav-link">Cart</NavLink>
           <NavLink to={routesMap.order} className="nav-link">Order</NavLink>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
-        </Form>
+        <Link to={routesMap.cart} className={styles.basket}>
+          <span className={`fa fa-shopping-cart mr-2 ${styles.cart}`}></span>
+          <span className={styles.count}>{stores.cart.count}</span>
+        </Link>
       </Navbar>
     )
 
