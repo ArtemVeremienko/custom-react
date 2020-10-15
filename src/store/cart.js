@@ -23,6 +23,10 @@ export default class {
     return this.productsDetailed.reduce((t, { price, cnt }) => t + price * cnt, 0);
   }
 
+  @computed get count() {
+    return this.products.length;
+  }
+
   @action add(id) {
     this.products.push({ id, cnt: 1 })
   }
