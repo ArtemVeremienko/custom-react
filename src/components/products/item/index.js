@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
 
-export default ({ title, price, LinkComponent, backUrl }) => {
+export default ({ title, price, LinkComponent, backUrl, btn }) => {
   return (
     <Col className="text-md-center">
       <h1>{title}</h1>
@@ -9,7 +9,9 @@ export default ({ title, price, LinkComponent, backUrl }) => {
       <div>
         <strong>Price: {price}</strong>
       </div>
-      <LinkComponent to={backUrl} className="btn btn-primary">Back to list</LinkComponent>
+      <LinkComponent to={backUrl} className="btn btn-primary mr-1">Back to list</LinkComponent>
+      {btn}
+
     </Col>
   )
 }
