@@ -8,16 +8,9 @@ import withStore from '~/hocs/withStore'
 
 class Product extends React.Component {
   render() {
-    const id = parseInt(this.props.match.params.id);
+    const id = this.props.match.params.id;
     const product = this.props.stores.products.getById(id);
-
     const cart = this.props.stores.cart;
-    let btn;
-    if (cart.inCart(id)) {
-      btn = <Button variant="danger" onClick={() => cart.remove(id)}>Remove from cart</Button>
-    } else {
-      btn = <Button variant="success" onClick={() => cart.add(id)}>Add to cart</Button>
-    }
 
     if (product === null) {
       return <E404 />
@@ -26,9 +19,10 @@ class Product extends React.Component {
         title={product.title}
         price={product.price}
         backUrl={routesMap.home}
-        cartUrl={routesMap.cart}
         LinkComponent={Link}
-        btn={btn}
+        inCart={cart.inCart(product.id)}
+        onAdd={() => cart.add(product.id)}
+        onRemove={() => cart.remove(product.id)}
       />
     }
   }
