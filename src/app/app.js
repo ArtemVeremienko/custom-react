@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Row, Col, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
-import { observer, Provider } from 'mobx-react';
+import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap'
+import { observer } from 'mobx-react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import routes, { routesMap } from '~/routes'
 import { Link, NavLink } from 'react-router-dom'
@@ -31,23 +31,21 @@ import stores from '~s/rootstore'
     )
 
     return (
-      <Provider stores={stores}>
-        <Router>
-          <Container>
-            <Row>
-              <Col>
-                {navbar}
-              </Col>
-            </Row>
+      <Router>
+        <Container>
+          <Row>
+            <Col>
+              {navbar}
+            </Col>
+          </Row>
 
-            <Row>
-              <Switch>
-                {routesComponents}
-              </Switch>
-            </Row>
-          </Container>
-        </Router>
-      </Provider>
+          <Row>
+            <Switch>
+              {routesComponents}
+            </Switch>
+          </Row>
+        </Container>
+      </Router>
     )
   }
 }
