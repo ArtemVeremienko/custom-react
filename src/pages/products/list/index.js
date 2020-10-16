@@ -26,10 +26,11 @@ class Products extends React.Component {
       return (
         <Col md={4} className="my-3" key={product.id}>
           <Card>
+            <Card.Img variant="top" src="https://via.placeholder.com/300x180" />
             <Card.Body>
               <Card.Title>{product.title}</Card.Title>
               <Card.Text>
-                <strong>Price: {product.price}</strong>
+                <strong>Price: {product.price}&#8381;</strong>
               </Card.Text>
               <Link to={urlBuilder('product', { id: product.id })}
                 className="btn btn-info"

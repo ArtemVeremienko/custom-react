@@ -73,7 +73,7 @@ class Order extends React.Component {
               <Modal.Title>Check information</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <p>Dear <strong>{name}</strong> you purchase for ${cartModel.total} ready.</p>
+              <p>Dear <strong>{name}</strong> you purchase for {cartModel.total}&#8381; ready.</p>
               <p>We send confirmation at {email} and {phone}.</p>
             </Modal.Body>
             <Modal.Footer>
