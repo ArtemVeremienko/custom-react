@@ -11,6 +11,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
+    overlay: true,
   },
   module: {
     rules: [
