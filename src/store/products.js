@@ -4,9 +4,19 @@ export default class {
   constructor(rootStore) {
     makeObservable(this)
     this.rootStore = rootStore
+    this.api = this.rootStore.api.products
   }
 
-  @observable items = getProducts()
+  @observable items = []
+
+  @action load() {
+    return new Promise((resolve, reject) => {
+      this.api.all().then(data => {
+        this.items = data
+        resolve(true)
+      })
+    })
+  }
 
   @computed get productsMap() {
     return this.items.reduce((obj, { id }, i) => {
