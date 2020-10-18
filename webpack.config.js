@@ -1,12 +1,12 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, './dist/'),
+    path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
-    publicPath: 'dist/',
   },
   devtool: 'source-map',
   devServer: {
@@ -64,9 +64,13 @@ module.exports = {
     }
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Online shop',
+      template: 'public/index.html'
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-    })
+    }),
   ],
   optimization: {
     splitChunks: {
